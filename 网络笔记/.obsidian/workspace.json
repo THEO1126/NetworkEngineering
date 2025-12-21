@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "配置案例.md",
+                "file": "网络配置命令.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "配置案例"
+              "title": "网络配置命令"
             }
           }
         ]
@@ -53,13 +53,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "配置案例.md",
+                "file": "网络配置命令.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "配置案例 的大纲"
+              "title": "网络配置命令 的大纲"
             }
           },
           {
@@ -89,7 +89,8 @@
               "title": "书签"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -186,9 +187,9 @@
   },
   "active": "435af4fdfd9eb354",
   "lastOpenFiles": [
-    "PLC.md",
-    "网络配置命令.md",
     "配置案例.md",
+    "网络配置命令.md",
+    "PLC.md",
     "华三网络模拟.md",
     "网络-图片/静态路由配置-二层交换机.png",
     "Pasted image 20250530010748.png.md",
