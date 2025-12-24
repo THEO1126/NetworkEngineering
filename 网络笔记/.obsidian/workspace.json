@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "fa4f534106386c56",
+    "id": "665e1420c22ab0e4",
     "type": "split",
     "children": [
       {
-        "id": "f6fa8752818e0309",
+        "id": "a3ad277d18317cc6",
         "type": "tabs",
         "children": [
           {
-            "id": "435af4fdfd9eb354",
+            "id": "6672c2da0b064b7f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "f9f1005685dd8110",
+    "id": "9aab6752ac8a29e8",
     "type": "split",
     "children": [
       {
-        "id": "063e8a6740ace4fb",
+        "id": "89eef76f4123f3bd",
         "type": "tabs",
         "children": [
           {
-            "id": "f5e7d938963bf6a1",
+            "id": "6af349cb335608f2",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,22 +48,7 @@
             }
           },
           {
-            "id": "ec1e26cb033fadf0",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "网络配置命令.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "网络配置命令 的大纲"
-            }
-          },
-          {
-            "id": "693acb85b8dfd0de",
+            "id": "21d9685ab34db722",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -80,7 +65,7 @@
             }
           },
           {
-            "id": "853286fefaf61658",
+            "id": "23b9b8e2e1f3c49b",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -88,29 +73,44 @@
               "icon": "lucide-bookmark",
               "title": "书签"
             }
+          },
+          {
+            "id": "19a844d38abb4484",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "网络配置命令.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "网络配置命令 的大纲"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
     "width": 200
   },
   "right": {
-    "id": "5440b5e66e418226",
+    "id": "378fb783922e5e81",
     "type": "split",
     "children": [
       {
-        "id": "80eca1ab27e0428f",
+        "id": "1e7a7b78c70272ff",
         "type": "tabs",
         "children": [
           {
-            "id": "645505ee70f7c9fa",
+            "id": "722572dfba03964a",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PLC.md",
+                "file": "网络配置命令.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,25 +120,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "PLC 的反向链接列表"
+              "title": "网络配置命令 的反向链接列表"
             }
           },
           {
-            "id": "f0a6c17f2465d11c",
+            "id": "03db4802e8bba385",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PLC.md",
+                "file": "网络配置命令.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "PLC 的出链列表"
+              "title": "网络配置命令 的出链列表"
             }
           },
           {
-            "id": "32f9fe6060ec6d66",
+            "id": "e1ea59eee801a846",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -153,18 +153,18 @@
             }
           },
           {
-            "id": "537bac16eac4490f",
+            "id": "5e13845b09d4d9dd",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "PLC.md",
+                "file": "网络配置命令.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "PLC 的大纲"
+              "title": "网络配置命令 的大纲"
             }
           }
         ]
@@ -176,38 +176,20 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:创建新数据库": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "bases:创建新数据库": false
     }
   },
-  "active": "435af4fdfd9eb354",
+  "active": "19a844d38abb4484",
   "lastOpenFiles": [
-    "附件/Pasted image 20251223221550.png",
-    "附件/Pasted image 20251223221507.png",
-    "附件/Pasted image 20251223221442.png",
-    "附件/Pasted image 20251223220854.png",
-    "附件/Pasted image 20251223220759.png",
-    "附件",
     "配置案例.md",
-    "网络配置命令.md",
-    "PLC.md",
     "华三网络模拟.md",
-    "网络-图片/静态路由配置-二层交换机.png",
-    "Pasted image 20250530010748.png.md",
-    "网络-图片/Pasted image 20250530010748.png",
-    "Pasted image 20250529004533.png.md",
-    "网络-图片/端口类别2.png",
-    "网络-图片/端口类别.png",
-    "网络-图片/Vlan互通配置-三层交换机.jpg",
-    "网络-图片/Pasted image 20250529004540.png",
-    "网络-图片",
-    "应急仓储.md",
-    "图片",
-    "2025-05-31.md"
+    "网络配置命令.md",
+    "PLC.md"
   ]
 }
