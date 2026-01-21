@@ -1,0 +1,308 @@
+# 一、常用命令
+
+## 交换机配置
+
+```shell
+display version  查看交换机软件版本
+display clock    查看交换机时钟
+display saved-configuration    显示系统保存配置
+display current-configuration  显示系统当前配置
+reset saved-configuration    恢复交换机出厂设置
+reboot 重启
+sysname sw1  设备重命名
+undo info-center enable 关闭信息提示
+
+```
+## 接口管理
+
+查看接口信息
+
+```shell
+interface gigabitethernet 0/0/1     进入指定的接口或子接口视图，进入0/0/1的接口
+display interface               查看接口当前运行状态和接口统计信息
+display interface brief         查看接口状态和配置的简要信息。
+display interface description   查看指定接口的描述信息
+display interface vlanif        查看VLANIF接口的状态信息、配置信息和统计信息。
+```
+接口配置
+```shell
+port                                               配置接口的缺省VLAN并加入该VLAN
+port description                                   配置接口的描述信息，描述与接口相连的设备类型
+port gigabitethernet 0/0/1 to 0/0/4
+port default vlan                                  配置接口的缺省VLAN并同时加入这个VLAN。
+port link-type {access | hybird | trunk}           配置接口的链路类型
+port trunk allow-pass vlan {vlanid}                将trunk接口加入vlan
+port default vlan {vlanid}
+
+# 端口组
+port-group group-member g0/0/1 to g0/0/4    创建临时端口组
+port-group _port-group-name_   创建并进入永久端口组视图
+group-member g0/0/1 to g0/0/4   进入端口组后，将接口添加到指定永久端口组中
+undo group-member g0/0/1  将指定端口从端口组移除
+undo port-group _port-group-name_ 删除端口组
+```
+
+## VLAN配置
+
+**VLAN管理**
+```shell
+vlan {id}                      创建VLAN并进入VLAN视图，如果VLAN已存在，直接进入该VLAN的视图。
+vlan batch 10 to 20            批量创建VLAN
+vlan batch 20 23 25            创建多个vlan
+vlan range 10 to 20            创建临时VLAN组，并进入VLAN-Range视图
+vlan statistics                配置VLAN的流量统计模式，即配置按包或按字节进行VLAN流量统计。
+vlan statistics interval       配置VLAN的流量统计的时间间隔
+ip address                     用来配置接口的IP地址。 
+```
+
+**删除vlan**
+```shell
+删除vlan
+
+[Huawei]int vlan 40                  进入该vlan视图
+[Huawei-Vlanif40]undo ip address     删除绑定的ip地址
+[Huawei]undo interface Vlanif 40     删除vlan
+```
+
+**VLAN查看**
+```shell
+display vlan                              显示VLAN信息
+display vlan {pvid} verbose               查看vlan的详细信息
+display port vlan                         查看VLAN中包含的接口信息
+display sub-vlan                          查看Sub-VLAN类型的VLAN表项信息
+display super-vlan                        查看Super-VLAN类型的VLAN表项信息
+display mac-vlan mac-address all          查看所有MAC地址划分VLAN的配置信息
+display mac-vlan vlan 2                   查看vlan 2 MAC地址划分VLAN的配置信息
+```
+
+## 路由
+
+**查看路由**
+```shell
+display ip routing-table        显示路由信息
+display ospf peer               查看ospf邻接等信息
+display ospf peer brief         查看ospf邻接等简要信息
+display rip                     查看rip路由信息
+```
+
+**静态路由**
+```shell
+<Huawei> system-view
+# 查看IPv4路由表中当前激活路由的摘要信息
+<Huawei> display ip routing-table
+#ip route-static 目的ip  目标地址掩码  下一跳ip
+[Huawei] ip route-static 10.0.1.0 255.255.255.0 10.0.0.1
+#删除路由
+[Huawei] undo ip route-static 10.0.1.0 255.255.255.0 10.0.0.1
+```
+
+## MAC地址
+```shell
+#查询MAC地址表
+display mac-address
+#查看交换机某个 vlan 对应的 mac-address
+mac-address vlan 1
+#查询指定 mac-address 相关信息
+display mac-address 6C4B-909D-41F6
+# 令查询IP地址与MAC地址的映射关系
+display arp
+# 清空arp条目
+arp -a -d
+```
+
+## DHCP操作
+
+```shell
+<ac> system-view
+#开启DHCP功能
+[ac] dhcp enable
+#进入vlan的接口视图
+[ac] interface vlan 1
+#设置vlan的三层网关路由
+[ac-Vlanif1] ip address 192.168.10.1 255.255.255.0
+#开启接口采用接口地址池的DHCP服务器功能。
+[ac-Vlanif1] dhcp select interface
+```
+
+### DHCP地址池
+
+**创建地址池范围**
+```shell
+#1、基于接口视图
+[ac]interface vlan 1
+# 指定的DHCP Server预分配给DHCP Client的IP地址范围。
+## dhcp server ip-range start-ip-address end-ip-address
+[ac-Vlanif1] dhcp server ip-range 192.168.10.100 192.168.10.120
+# 指定DHCP Server预  分配给DHCP Client的IP地址的子网掩码
+## dhcp server mask { mask | mask-length }
+[ac-Vlanif1] dhcp server mask 255.255.255.0
+```
+**配置不参与自动分配的 IP 地址**
+```shell
+#1、基于接口视图
+[ac]interface vlan 1
+# 配置地址池中不参与自动分配的IP地址
+## dhcp server excluded-ip-address start-ip-address [ end-ipaddress ]
+[ac-Vlanif1]dhcp server excluded-ip-address 192.168.1.10
+[ac-Vlanif1]dhcp server excluded-ip-address 192.168.10 230 192.168.10 240
+```
+
+### DHCP配置举例
+
+在AC上配置VLANIF100接口为AP提供IP地址，配置VLANIF101接口为STA提供IP地址，并配置下一跳为Router的缺省路由
+```shell
+[AC] dhcp enable  
+[AC] interface vlanif 100  
+[AC-Vlanif100] ip address 10.23.100.1 24  
+[AC-Vlanif100] dhcp select interface  
+[AC-Vlanif100] quit  
+[AC] interface vlanif 101  
+[AC-Vlanif101] ip address 10.23.101.1 24  
+[AC-Vlanif101] dhcp select interface  
+[AC-Vlanif101] dhcp server excluded-ip-address 10.23.101.2  
+[AC-Vlanif101] quit  
+[AC] ip route-static 0.0.0.0 0.0.0.0 10.23.101.2
+# DNS服务器地址
+# 接口地址池场景，需要在VLANIF接口视图下执行命令
+dhcp server dns-list ip-address  &<1-8>
+#全局地址池场景，需要在IP地址池视图下执行命令
+dns-list ip-address &<1-8>
+```
+
+## WLAN业务
+[华为无线：AC+AP+交换机(ENSP实验) - 知乎](https://zhuanlan.zhihu.com/p/719934920)
+### AP
+
+**创建AP组（可选）**
+```shell
+[ac]wlan      # 进入wlan视图
+# 创建AP组名 ap-group name group-name，缺省情况下，系统上存在名为default的AP组
+[ac-wlan-view]ap-group name apGroup
+[ac-wlan-view]display ap-group { all | name group-name } #查看AP组的信息     
+```
+**创建域管理模板**
+在域管理模板下配置AC的国家码并在AP组下引用域管理模板
+```shell
+[AC-wlan-view] regulatory-domain-profile name default  
+[AC-wlan-regulate-domain-default] country-code cn  
+[AC-wlan-regulate-domain-default] quit  
+[AC-wlan-view] ap-group name ap-group1  
+[AC-wlan-ap-group-ap-group1] regulatory-domain-profile default
+```
+
+**配置AP上线（添加AP）**
+
+>前提是先配置DHCP服务器，为AP分配IP地址
+
+添加AP有三种方式：离线导入AP、自动发现AP以及手工确认未认证列表中的AP
+- 自动发现AP：当配置AP的认证模式为不认证或配置AP的认证模式为MAC或SN认  
+证且将AP加入AP白名单中，则当AP与AC连接时， AP将被AC自动发现并正常上  
+线。
+
+>首先配置AC方式为不认证，待AP上线后，再改成MAC认证，并指定的MAC地址到AP白名单
+
+```shell
+[ac]wlan
+# 不认证
+[ac-wlan-view]ap auth-mode no-auth
+# 配置AP认证模式为 MAC认证或SN认证
+[ac-wlan-view]ap auth-mode { mac-auth | sn-auth }
+## 添加指定的MAC地址到AP白名单
+[ac-wlan-view]ap whitelist mac ap-mac1
+## 添加指定的SN到AP白名单
+[ac-wlan-view]ap whitelist sn ap-sn1
+# 方式、手动确认
+[ac-wlan-view] display ap unauthorized record #查看未认证通过的AP信息
+## 确认未认证通过的 AP，确认后， AP将进入“normal”状态。
+[ac-wlan-view] ap-confirm { all | mac ap-mac | sn ap-sn }
+```
+**将AP放到指定的AP组（可选）**
+
+```shell
+[ac]wlan
+# 可通过AP id后者mac进入ap视图，ap-id 0 或 ap-mac 00e0-fce7-6420
+[ac-wlan-view]ap-id 0
+# 将视图下的AP添加进名为ap-group1的AP组
+[ac-wlan-ap-0]ap-group ap-group1
+```
+
+**capwap隧道配置源接口**
+❗(重要）为capwap隧道配置源接口，否则AC上无法发现AP
+```shell
+# !!(重要）为capwap隧道配置源接口，否则AC上无法发现AP
+[ac]capwap source interface Vlanif 10
+# 开启CAPWAP DTLS不认证方式
+## AC默认开启CAPWAP控制隧道的DTLS加密功能。开启该功能，添加AP时AP会上线失败，此时需要先开启CAPWAP DTLS不认证方式让AP上线，以便AP获取安全凭证AP上线后应及时关闭该功能，避免未授权AP上线。
+[ac]capwap dtls no-auth enable
+# AP上线后应及时关闭CAPWAP DTLS不认证方式
+[ac]undo capwap dtls no-auth enable
+```
+
+**检查配置结果**
+```shell
+display ap global configuration #查看AP的认证模式 
+display ap blacklist #查看AP黑名单信息
+display ap whitelist { mac | sn } #查看AP白名单信息
+display ap all #查看AP的上线结果
+display ap unauthorized record #查看未认证通过的AP信息
+ap-confirm { all | mac ap-mac | sn ap-sn } #确认未认证通过的AP，确认后，AP将进入normal状态
+```
+
+### SSID
+
+创建名为“wlan-net ”的安全模版，配置安全策略
+```shell
+# 以配置WPA-WPA2+PSK+AES的安全策略为例，密码为THEO1126
+[AC-wlan-view] security-profile name wlan-net  
+[AC-wlan-sec-prof-wlan-net]security wpa-wpa2 psk pass-phrase THEO1126 aes
+```
+ 创建名为“ wlan-net”的SSID模板，并配置SSID名称为“ wlan-net-wifi”
+```shell
+[AC-wlan-view] ssid-profile name wlan-net
+[AC-wlan-ssid-prof-wlan-net] ssid wifi-name
+```
+创建名为“wlan-net”的VAP模板，配置业务数据转发模式、业务VLAN，并且引用安全模板和SSID模板
+```shell
+[AC-wlan-view] vap-profile name wlan-net 
+# 数据转发模式 direct-forward：直接转发  tunnel：隧道转发  
+[AC-wlan-vap-prof-wlan-net] forward-mode direct-forward
+[AC-wlan-vap-prof-wlan-net] service-vlan vlan-id 101
+[AC-wlan-vap-prof-wlan-net] security-profile wlan-net
+[AC-wlan-vap-prof-wlan-net] ssid-profile wlan-net
+[AC-wlan-vap-prof-wlan-net] quit
+# 复制版
+vap-profile name wlan-net 
+forward-mode direct-forward
+service-vlan vlan-id 101  # 改成对应id
+security-profile wlan-net
+ssid-profile wlan-net
+```
+配置AP组引用VAP模板， AP上射频0和射频1都使用VAP模板“ wlan-net”的配置
+```shell
+[AC-wlan-view] ap-group name ap-group1  
+[AC-wlan-ap-group-ap-group1] vap-profile wlan-net wlan 1 radio 0  
+[AC-wlan-ap-group-ap-group1] vap-profile wlan-net wlan 1 radio 1  
+[AC-wlan-ap-group-ap-group1] quit
+```
+验证业务配置
+```shell
+# 查看SSID为wlan-net的配置信息
+## WLAN业务配置会自动下发给AP，配置完成后，通过执行命令display vap ssid wlan-name查看如下信息，当“ Status”项显示为“ON”时，表示AP对应的射频上的VAP已创建成功
+[AC]display vap ssid wlan-name
+# 查看状态，查看终端设备接入到无线网络的情况
+[AC]display station ssid wlan-name
+```
+
+# 二、知识点
+
+## IP地址
+
+**私有IP地址**
+
+- A类地址范围：10.0.0.0到10.255.255.255
+  
+- B类地址范围：172.16.0.0到172.31.255.255
+  
+- C类地址范围：192.168.0.0到192.168.255.255
+
+## 端口

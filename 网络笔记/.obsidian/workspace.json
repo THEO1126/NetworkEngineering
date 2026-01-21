@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "配置案例.md",
+                "file": "网络配置命令.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "配置案例"
+              "title": "网络配置命令"
             }
           }
         ]
@@ -80,13 +80,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "配置案例.md",
+                "file": "网络配置命令.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "配置案例 的大纲"
+              "title": "网络配置命令 的大纲"
             }
           }
         ],
@@ -94,7 +94,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 222.5110321044922
   },
   "right": {
     "id": "378fb783922e5e81",
@@ -185,11 +185,12 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "6672c2da0b064b7f",
+  "active": "19a844d38abb4484",
   "lastOpenFiles": [
-    "网络配置命令.md",
     "配置案例.md",
     "华三网络模拟.md",
+    "网络配置命令.md",
+    "附件/Pasted image 20251223220759.png",
     "PLC.md"
   ]
 }
